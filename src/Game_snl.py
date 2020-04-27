@@ -1,4 +1,5 @@
 from random import sample, choice
+import matplotlib.pyplot as plt
 
 
 class Cell(object):
@@ -50,6 +51,11 @@ class Board(object):
                 print(f"Ignoring fake transport from {start} to {end}")
             self.board[start].goto = end
 
+    def describe(self):
+        for cell in self.board:
+            if cell.present:
+                print(f"{cell.present} from {cell.ix} to {cell.goto}")
+
 
 class Dice:
     def __init__(self, n_faces=6, seed=0):
@@ -65,19 +71,24 @@ class Player:
         self.id = id
         self.pos = None
         self.end = None
+        self.rolls = []
+        self.positions = []
 
     def move(self, pos, board):
         print(f"Player {self.id} is at {self.pos} and got {pos}")
+        self.rolls.append(pos)
         new_pos = self.pos + pos if self.pos else pos
         try:
             new_pos = (
                 board.board[new_pos].goto if board.board[new_pos].goto else new_pos
             )
         except IndexError:
+            self.positions.append(self.pos)
             return
         if new_pos == len(board.board) - 1:
             self.end = True
         print(f"Player {self.id} moves to {new_pos}")
+        self.positions.append(new_pos)
         self.pos = new_pos
 
 
@@ -95,8 +106,12 @@ class Game:
                 dice_value = self.dice.roll()
                 player.move(dice_value, self.board)
 
+    def show(self):
+        plt.plot(self.players[0].positions)
+        plt.plot(self.players[1].positions)
+        plt.show()
+
 
 if __name__ == "__main__":
-    new_game = Game(2)
-    new_game.play()
-
+    game = Game(2)
+    game.play()
