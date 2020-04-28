@@ -115,3 +115,6 @@ class Game:
 if __name__ == "__main__":
     game = Game(2)
     game.play()
+    print("=" * 40)
+    game.board.describe()
+    game.show()
