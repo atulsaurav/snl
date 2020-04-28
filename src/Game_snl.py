@@ -110,6 +110,9 @@ class Game:
     def show(self):
         plt.plot(self.players[0].positions)
         plt.plot(self.players[1].positions)
+        plt.xlabel("Turn number")
+        plt.ylabel("Position on the board")
+        plt.title("Game of Snakes & Ladders")
         plt.show()
 
 
