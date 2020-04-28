@@ -2,6 +2,8 @@ from random import sample, choice
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+plt.style.use("seaborn")
+
 
 class Cell(object):
     """Represents each cell on the board
@@ -73,7 +75,7 @@ class Player:
         self.pos = None
         self.end = None
         self.rolls = []
-        self.positions = []
+        self.positions = [0]
 
     def move(self, pos, board):
         print(f"Player {self.id} is at {self.pos} and got {pos}")
@@ -108,11 +110,12 @@ class Game:
                 player.move(dice_value, self.board)
 
     def show(self):
-        plt.plot(self.players[0].positions)
-        plt.plot(self.players[1].positions)
+        plt.plot(self.players[0].positions, label="Player 0")
+        plt.plot(self.players[1].positions, label="Player 1")
         plt.xlabel("Turn number")
         plt.ylabel("Position on the board")
         plt.title("Game of Snakes & Ladders")
+        plt.legend()
         plt.show()
 
 
