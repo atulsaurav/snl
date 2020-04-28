@@ -1,5 +1,6 @@
 from random import sample, choice
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 
 class Cell(object):
@@ -38,7 +39,7 @@ class Board(object):
         for x in range(N * N):
             self.board.append(Cell(x))
 
-        starts = sample(range(1, N * N), n)
+        starts = sample(range(1, N * N - 1), n)
         ends = sample(range(1, N * N), n)
         for start, end in zip(starts, ends):
             if start < end:
@@ -93,10 +94,10 @@ class Player:
 
 
 class Game:
-    def __init__(self, n_players):
+    def __init__(self, n_players, size=10, sol=10):
         self.players = [Player(x) for x in range(n_players)]
         self.dice = Dice(n_faces=6)
-        self.board = Board(N=10, n=10)
+        self.board = Board(N=size, n=sol)
 
     def play(self):
         while True:
@@ -113,7 +114,7 @@ class Game:
 
 
 if __name__ == "__main__":
-    game = Game(2)
+    game = Game(2, size=10, sol=15)
     game.play()
     print("=" * 40)
     game.board.describe()
