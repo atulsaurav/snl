@@ -40,7 +40,7 @@ class Board(object):
             self.board.append(Cell(x))
 
         starts = sample(range(1, N * N - 1), n)
-        ends = sample(range(1, N * N), n)
+        ends = sample(range(1, N * N - 1), n)
         for start, end in zip(starts, ends):
             if start < end:
                 self.board[start].present = "Ladder"
