@@ -103,11 +103,13 @@ class Game:
 
     def play(self):
         while True:
-            if len([p for p in self.players if p.end]) == len(self.players) - 1:
+            if len([p for p in self.players if p.end]) >= len(self.players) - 1:
                 break
             for player in self.players:
                 dice_value = self.dice.roll()
                 player.move(dice_value, self.board)
+                if player.end:
+                    break
 
     def show(self):
         plt.plot(self.players[0].positions, label="Player 0")
