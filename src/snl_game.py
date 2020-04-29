@@ -1,3 +1,5 @@
+"""Game of Snakes and Ladders"""
+
 from random import sample, choice
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation

@@ -1,2 +1,3 @@
 # snl
-Snakes and Ladders simulation
+
+Snakes `n Ladders simulation. No, SNL is not not Saturday Night Live.
